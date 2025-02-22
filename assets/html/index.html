@@ -3,18 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hangman Game - Software Engineering</title>
+    <title>TechForca</title>
     <link rel="stylesheet" href="../css/index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Hangman Game - Software Engineering</h1>
-    <p>Learn technical terms in a fun way!</p>
-    <div id="hangmanImage">
-        <img src="../images/forca.png" alt="Hangman" id="hangman">
+    <div id="startScreen">
+        <h1>TechForca</h1>
+        <p>Aprenda de uma forma divertida!</p>
+        <button id="startButton">Start</button>
     </div>
-    <div id="hint"></div>
-    <div id="wordDisplay">_ _ _ _ _</div>
-    <div id="letters"></div>
+    <div id="gameScreen" style="display: none;">
+        <h1>TechForca</h1>
+        <button id="quitButton">QUIT</button>
+        <div id="hangmanImage">
+            <img src="../images/forca.png" alt="Hangman" id="hangman">
+        </div>
+        <div id="hint"></div>
+        <div id="wordDisplay">_ _ _ _ _</div>
+        <div id="letters"></div>
+    </div>
+    <audio id="backgroundMusic" src="../audio/background-music.mp3" loop></audio>
+    <audio id="gameOverSound" src="../audio/game-over.wav"></audio>
+    <audio id="congratulationsSound" src="../audio/congratulations.wav"></audio>
     <script src="../js/index.js"></script>
+    <script>
+        document.getElementById('startButton').addEventListener('click', function() {
+            var audio = document.getElementById('backgroundMusic');
+            audio.play().catch(function(error) {
+                console.log('Autoplay was prevented:', error);
+            });
+            document.getElementById('startScreen').style.display = 'none';
+            document.getElementById('gameScreen').style.display = 'block';
+        });
+
+        document.getElementById('quitButton').addEventListener('click', function() {
+            document.getElementById('gameScreen').style.display = 'none';
+            document.getElementById('startScreen').style.display = 'flex';
+            var audio = document.getElementById('backgroundMusic');
+            audio.pause();
+            audio.currentTime = 0;
+        });
+    </script>
 </body>
 </html>
